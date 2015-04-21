@@ -7,9 +7,24 @@ angular.module('firePockets')
         var factory = {};
 
         factory.createPocket = function(pocket) {
-            console.log(pocket);
             return $firebaseArray(new Firebase(url)).$add(pocket);
         };
 
+        factory.getPockets = function() {
+        	return $firebaseArray(new Firebase(url)); 
+        };
+        factory.getTotal = function(callback) {
+        	var pockets = factory.getPockets();
+
+        	pockets.$loaded().then(function (data) {
+		        var total = 0;
+		        angular.forEach(pockets, function (pocket) {
+		            if (pocket && pocket.balance) {
+		                total += parseInt(pocket.balance);
+		            }
+	        	});
+	        	callback(total);
+			});
+        };
         return factory;
     }]);
