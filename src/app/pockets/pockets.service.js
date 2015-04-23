@@ -11,20 +11,26 @@ angular.module('firePockets')
         };
 
         factory.getPockets = function() {
-        	return $firebaseArray(new Firebase(url)); 
+            return $firebaseArray(new Firebase(url)); 
         };
         factory.getTotal = function(callback) {
-        	var pockets = factory.getPockets();
+            var pockets = factory.getPockets();
 
-        	pockets.$loaded().then(function (data) {
-		        var total = 0;
-		        angular.forEach(pockets, function (pocket) {
-		            if (pocket && pocket.balance) {
-		                total += parseInt(pocket.balance);
-		            }
-	        	});
-	        	callback(total);
-			});
+            pockets.$loaded().then(function () {
+                var total = 0;
+                angular.forEach(pockets, function (pocket) {
+                    if (pocket && pocket.balance) {
+                        total += parseInt(pocket.balance);
+                    }
+                });
+                callback(total);
+            });
         };
+
+        factory.addAction = function(action) {
+            var pocket = factory.getPockets().$getRecord(action.pocket);
+            console.log(pocket);
+        };
+
         return factory;
     }]);

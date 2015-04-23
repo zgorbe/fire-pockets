@@ -22,35 +22,7 @@
             </table>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-6">
-            <button class="btn btn-lg btn-default">Create action</button>
-            <button class="btn btn-lg btn-default">Create movement</button>
-        </div>        
-    </div>
-    <div class="row">
-        <form class="col-md-6" ng-submit="addAction(action)">
-            <div class="form-group">
-                <label for="action-pocket">Pocket:</label>
-                <select id="action-pocket" class="form-control" ng-model="action.pocket" ng-options="pocket.$id as pocket.name for pocket in pockets">
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="action-amount">Amount:</label>
-                <input id="action-amount" class="form-control" type="number" ng-model="action.amount" />
-            </div>
-            <div class="form-group">
-                <label for="action-direction">Direction:</label>
-                <select id="action-direction" class="form-control" ng-model="action.direction">
-                    <option value="plus" selected>plus</option>
-                    <option value="minus">minus</option>
-                </select>
-            </div>
-            <input class="btn btn-default" type="submit" value="Create" />
-        </form>
-    </div>
-
+    <div ng-include="'app/actions/actions.html'"></div>
     <hr>
-
     <div ng-include="'app/components/footer/footer.html'"></div>
 </div>
