@@ -5,7 +5,7 @@ angular.module('firePockets')
         $scope.action = {
             direction: 'plus'
         };
-        $scope.movement = {};
+        $scope.movement = { };
        
         $scope.pockets.$loaded().then(function(data) {
             $scope.action.pocket = data[0].$id;
@@ -14,22 +14,24 @@ angular.module('firePockets')
         });
 
         $scope.showActionForm = function() {
+            delete $scope.action.amount;
             $scope.movementFormVisible = false;
             $scope.actionFormVisible = true;
-        }
+        };
 
         $scope.showMovementForm = function() {
+            delete $scope.movement.amount;
             $scope.actionFormVisible = false;
             $scope.movementFormVisible = true;
-        }
+        };
 
         $scope.hideForm = function() {
             $scope.actionFormVisible = false;
             $scope.movementFormVisible = false;
-        }
+        };
 
         $scope.addAction = function(action) {
             PocketsService.addAction(action);
             $scope.hideForm();
-        }
+        };
 }]);

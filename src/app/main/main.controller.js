@@ -14,5 +14,5 @@ angular.module('firePockets')
                 'name' : pocket.name,
                 'timestamp' : new Date().getTime()
             });
-        }
+        };
 }]);
