@@ -1,8 +1,12 @@
 'use strict';
 
 angular.module('firePockets')
-    .factory('PocketsService', ['$firebaseArray', '$firebaseObject', function ($firebaseArray, $firebaseObject) {
+    .factory('PocketsService', ['$firebaseArray', '$firebaseObject', '$q', function ($firebaseArray, $firebaseObject, $q) {
         var url = 'https://fire-pockets.firebaseio.com/pockets';
+
+        var updateTimestamp = function(obj) {
+            obj.timestamp = new Date().getTime();
+        };
 
         var factory = {};
 
@@ -18,8 +22,13 @@ angular.module('firePockets')
             return $firebaseObject(new Firebase(url + '/' + id)); 
         };
         
-        factory.getTotal = function(callback) {
-            var pockets = factory.getPockets();
+        factory.getPocketActions = function(pocketId) {
+            return $firebaseArray(new Firebase(url + '/' + pocketId + '/actions')); 
+        };
+
+        factory.getTotal = function() {
+            var pockets = factory.getPockets(),
+                deferred = $q.defer();
 
             pockets.$loaded().then(function () {
                 var total = 0;
@@ -28,27 +37,48 @@ angular.module('firePockets')
                         total += parseInt(pocket.balance);
                     }
                 });
-                callback(total);
+                deferred.resolve(total);
             });
+
+            return deferred.promise;
         };
 
         factory.addAction = function(action) {
-            var pocket = factory.getPocket(action.pocket);
+            var pocket = factory.getPocket(action.pocket),
+                deferred = $q.defer();
+            
             pocket.$loaded().then(function () {
                 if (action.direction === 'plus') {
                     pocket.balance += parseInt(action.amount);
                 } else {
                     pocket.balance -= parseInt(action.amount);
                 }
+                updateTimestamp(pocket);
                 pocket.$save();
+                deferred.resolve();
             });
             
-            /*pocket.$loaded().then(function (data) {
-                console.log(pocket.balance);
-            });*/
+            var actions = factory.getPocketActions(action.pocket); 
+                       
+            updateTimestamp(action);
+            actions.$add(action);
+
+            return deferred.promise;
+        };
+
+        factory.addMovement = function(movement) {
+            var actionMinus = {},
+                actionPlus = {};
             
-            /*action.timestamp = new Date().getTime();
-            pocket.$add(action);*/
+            actionMinus.pocket = movement.source;
+            actionMinus.amount = movement.amount;
+            actionMinus.direction = 'minus';
+            actionPlus.pocket = movement.destination;
+            actionPlus.amount = movement.amount;
+            actionPlus.direction = 'plus';
+
+            factory.addAction(actionMinus);
+            factory.addAction(actionPlus);
         };
 
         return factory;

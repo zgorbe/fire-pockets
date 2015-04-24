@@ -31,7 +31,14 @@ angular.module('firePockets')
         };
 
         $scope.addAction = function(action) {
-            PocketsService.addAction(action);
+            PocketsService.addAction(action).then(function() {
+                $scope.$emit('updateTotal');
+            });
+            $scope.hideForm();
+        };
+
+        $scope.addMovement = function(movement) {
+            PocketsService.addMovement(movement);
             $scope.hideForm();
         };
 }]);
