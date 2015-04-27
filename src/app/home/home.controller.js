@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('firePockets')
-    .controller('MainCtrl', ['$scope', 'PocketsService', function ($scope, PocketsService) {
+    .controller('HomeCtrl', ['$scope', 'PocketsService', function ($scope, PocketsService) {
         var updateTotal = function() {
         	PocketsService.getTotal().then(function(total) {
         		$scope.total = total;

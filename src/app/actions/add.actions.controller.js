@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('firePockets')
-    .controller('ActionsCtrl', ['$scope', 'PocketsService', function ($scope, PocketsService) {
+    .controller('AddActionsCtrl', ['$scope', 'PocketsService', function ($scope, PocketsService) {
         $scope.action = {
             direction: 'plus'
         };

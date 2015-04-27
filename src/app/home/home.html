@@ -1,0 +1,22 @@
+<div class="jumbotron text-center">
+    <h3>Your total balance is {{total}}</h3>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <table class="table">
+            <thead>
+                <td>Pocket</td>
+                <td>Balance</td>
+                <td>Last Action</td>
+            </thead>
+            <tbody>
+                <tr ng-repeat="pocket in pockets">
+                    <td>{{pocket.name}}</td>
+                    <td>{{pocket.balance}}</td>
+                    <td>{{pocket.timestamp | date}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div ng-include="'app/actions/add.html'"></div>

@@ -1,0 +1,11 @@
+{
+    "name": "fire-pockets-app",
+    "description": "A simple angularjs app with firebase",
+    "version": "0.0.1",
+    "dependencies": {
+        "express": "4.x"
+    },
+    "scripts" : {
+        "start": "node app.js"
+    }
+}

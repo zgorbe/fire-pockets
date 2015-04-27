@@ -81,9 +81,16 @@ module.exports = function(options) {
       .pipe(gulp.dest(options.dist + '/'));
   });
 
+  gulp.task('heroku', function () {
+    return gulp.src([
+      options.heroku + '/**/*'
+    ])
+      .pipe(gulp.dest(options.dist + '/'));
+  });
+
   gulp.task('clean', function (done) {
     $.del([options.dist + '/', options.tmp + '/'], done);
   });
 
-  gulp.task('build', ['html', 'fonts', 'other']);
+  gulp.task('build', ['html', 'fonts', 'other', 'heroku']);
 };
