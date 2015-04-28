@@ -4,11 +4,11 @@
             <div ng-bind='loginFailure' class="error-message"></div>
             <div class="form-group">
                 <label for="user-email">Email:</label>
-                <input id="user-email" class="form-control" type="email" ng-model="user.email" />
+                <input id="user-email" class="form-control" type="email" ng-model="user.email" required="" />
             </div>
             <div class="form-group">
                 <label for="user-password">Password:</label>
-                <input id="user-password" class="form-control" type="password" ng-model="user.password" />
+                <input id="user-password" class="form-control" type="password" ng-model="user.password" required="" />
             </div>
             <div class="form-group text-center">
                 <input class="btn btn-lg btn-info" type="submit" value="Login" />

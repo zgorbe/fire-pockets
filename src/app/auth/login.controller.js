@@ -1,15 +1,17 @@
 'use strict';
 
 angular.module('firePockets')
-    .controller('LoginCtrl', ['$scope', '$location', 'Auth', function ($scope, $location, Auth) {
+    .controller('LoginCtrl', ['$scope', '$rootScope', '$location', 'Auth', function ($scope, $rootScope, $location, Auth) {
         $scope.authenticate = function(user) {
             Auth.$authWithPassword({
                 email: user.email,
                 password: user.password
-            }).then(function() {
-                $location.url('/');
+            }).then(function(authData) {
+                $location.path('/');
+                $rootScope.$broadcast('loginEvent', authData.password.email);
             }).catch(function() {
                 $scope.loginFailure = 'Authentication failed';
+                $scope.user = {};
             });
         };
 }]);
