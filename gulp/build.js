@@ -83,7 +83,8 @@ module.exports = function(options) {
 
   gulp.task('heroku', function () {
     return gulp.src([
-      options.heroku + '/**/*'
+      options.heroku + '/**/*',
+      options.heroku + '/**/.*'
     ])
       .pipe(gulp.dest(options.dist + '/'));
   });

@@ -17,7 +17,7 @@
             </div>
             <div class="form-group">
                 <label for="action-amount">Amount:</label>
-                <input id="action-amount" class="form-control" type="number" ng-model="action.amount" />
+                <input id="action-amount" class="form-control" type="number" ng-model="action.amount" required="" />
             </div>
             <div class="form-group">
                 <label for="action-direction">Direction:</label>
@@ -28,7 +28,7 @@
             </div>
             <div class="form-group">
                 <input class="btn btn-default btn-info" type="submit" value="Create action" />
-                <button class="btn btn-default" ng-click='hideForm()'>Cancel</button>
+                <input type="button" class="btn btn-default" ng-click='hideForm()' value="Cancel" />
             </div>
         </form>
 
@@ -45,11 +45,11 @@
             </div>
             <div class="form-group">
                 <label for="movement-amount">Amount:</label>
-                <input id="movement-amount" class="form-control" type="number" ng-model="movement.amount" />
+                <input id="movement-amount" class="form-control" type="number" ng-model="movement.amount" required="" />
             </div>
             <div class="form-group">
                 <input class="btn btn-default btn-info" type="submit" value="Create movement" />
-                <button class="btn btn-default" ng-click='hideForm()'>Cancel</button>
+                <input type="button" class="btn btn-default" ng-click='hideForm()' value="Cancel" />
             </div>
         </form>
     </div>
