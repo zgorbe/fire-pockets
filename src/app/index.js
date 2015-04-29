@@ -1,8 +1,12 @@
 'use strict';
 
 angular.module('firePockets', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngRoute', 'firebase'])
-  .config(function ($routeProvider) {
-    $routeProvider
+    .constant('firebaseConfig', {
+        'pocketsUrl': 'https://fire-pockets.firebaseio.com/pockets',
+        'playgroundUrl': 'https://fire-pockets.firebaseio.com/playground'
+    })
+    .config(function ($routeProvider) {
+        $routeProvider
         .when('/', {
             templateUrl: 'app/home/home.html',
             controller: 'HomeCtrl',
@@ -24,14 +28,18 @@ angular.module('firePockets', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize'
         .when('/login', {
             templateUrl: 'app/auth/login.html',
             controller: 'LoginCtrl'
+        })
+        .when('/playground', {
+            templateUrl: 'app/playground/playground.html',
+            controller: 'PlaygroundCtrl'
         })        
         .otherwise({
             redirectTo: '/'
         });
-  }).run(['$rootScope', '$location', function($rootScope, $location) {
-    $rootScope.$on('$routeChangeError', function(event, next, previous, error) {
-        if (error === 'AUTH_REQUIRED') {
-            $location.path('/login');
-        }
-    });
-}]);
+    }).run(['$rootScope', '$location', function($rootScope, $location) {
+        $rootScope.$on('$routeChangeError', function(event, next, previous, error) {
+            if (error === 'AUTH_REQUIRED') {
+                $location.path('/login');
+            }
+        });
+    }]);

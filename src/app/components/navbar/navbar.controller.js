@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('firePockets')
-    .controller('NavbarCtrl', ['$scope', 'Auth', function($scope, Auth) {
+    .controller('NavbarCtrl', ['$scope', '$location', 'Auth', function($scope, $location, Auth) {
         $scope.loggedIn = Auth.$getAuth();
 
         $scope.$on('logoutEvent', function() {
@@ -11,4 +11,8 @@ angular.module('firePockets')
         $scope.$on('loginEvent', function() {
             $scope.loggedIn = true;
         });
+
+		$scope.isActive = function (viewLocation) { 
+			return viewLocation === $location.path();
+		};
     }]);

@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('firePockets')
-    .factory('PocketsService', ['$firebaseArray', '$firebaseObject', '$q', function ($firebaseArray, $firebaseObject, $q) {
-        var url = 'https://fire-pockets.firebaseio.com/pockets';
+    .factory('PocketsService', ['$firebaseArray', '$firebaseObject', '$q', 'firebaseConfig', function ($firebaseArray, $firebaseObject, $q, firebaseConfig) {
+        var url = firebaseConfig.pocketsUrl;
 
         var updateTimestamp = function(obj) {
             obj.timestamp = new Date().getTime();
