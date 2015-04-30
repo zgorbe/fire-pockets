@@ -1,8 +1,22 @@
 <section ng-controller="PlaygroundCtrl">
     <div class="row">
         <div class="col-md-offset-2 col-md-8">
-            <div>{{playground}}</div>
-            <textarea ng-model='playground'></textarea>
+            <div class="messages">
+                <div ng-repeat='message in playground.messages' class="message">
+                    {{message}}
+                </div>
+            </div>
+            <div><input type="button" class="btn btn-lg btn-info" value="Add a message" ng-click='showAddForm()' ng-hide='addFormVisible' /></div>
+            <form ng-submit='addMessage(message)' ng-show='addFormVisible'>
+                <div class="form-group">
+                    <label for="messageText">Your message:</label>
+                    <textarea id="messageText" ng-model='message' required=""></textarea>
+                </div>
+                <div class="form-group text-right">
+                    <input type="submit" class="btn btn-lg btn-info" value="Add" />
+                    <input type="button" class="btn btn-lg" value="Cancel" ng-click='hideAddForm()'/>
+                </div>
+            </form>
         </div>
     </div>
 </section>

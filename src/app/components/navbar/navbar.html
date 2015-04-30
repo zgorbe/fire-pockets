@@ -7,11 +7,10 @@
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6">
-            <ul class="nav navbar-nav" ng-show='loggedIn'>
-                <li ng-class="{ active: isActive('/')}"><a ng-href="#/">Home</a></li>
-                <li ng-class="{ active: isActive('/actions')}"><a ng-href="#/actions">Actions</a></li>
-            </ul>
             <ul class="nav navbar-nav">
+                <li ng-class="{ active: isActive('/')}" ng-show='loggedIn'><a ng-href="#/">Home</a></li>
+                <li ng-class="{ active: isActive('/actions')}" ng-show='loggedIn'><a ng-href="#/actions">Actions</a></li>
+                <li ng-class="{ active: isActive('/login')}" ng-show='!loggedIn'><a ng-href="#/login">Login</a></li>
                 <li ng-class="{ active: isActive('/playground')}"><a ng-href="#/playground">Playground</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right" ng-show='loggedIn'>

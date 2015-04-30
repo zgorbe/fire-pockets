@@ -3,10 +3,19 @@
 angular.module('firePockets')
     .controller('PlaygroundCtrl', ['$scope', '$firebaseObject', 'firebaseConfig', function ($scope, $firebaseObject, firebaseConfig) {
     	var obj = $firebaseObject(new Firebase(firebaseConfig.playgroundUrl));
+    	obj.$bindTo($scope, 'playground');
 
-    	obj.$bindTo($scope, 'playground').then(function() {
-  			console.log($scope.playground); //
-  			/*$scope.data.foo = "baz";  // will be saved to Firebase
-  			ref.set({ foo: "baz" }); */ // this would update Firebase and $scope.data
-		});
+        $scope.showAddForm = function() {
+            $scope.addFormVisible = true;
+        };
+
+        $scope.hideAddForm = function() {
+            $scope.addFormVisible = false;
+        };        
+
+        $scope.addMessage = function(message) {
+            $scope.playground.messages.push(message);
+            $scope.message = '';
+            $scope.addFormVisible = false;
+        };
 }]);
