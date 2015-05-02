@@ -1,11 +1,6 @@
 <section ng-controller="PlaygroundCtrl">
     <div class="row">
         <div class="col-md-offset-2 col-md-8">
-            <div class="messages">
-                <div ng-repeat='message in playground.messages' class="message">
-                    {{message}}
-                </div>
-            </div>
             <div><input type="button" class="btn btn-lg btn-info" value="Add a message" ng-click='showAddForm()' ng-hide='addFormVisible' /></div>
             <form ng-submit='addMessage(message)' ng-show='addFormVisible'>
                 <div class="form-group">
@@ -17,6 +12,11 @@
                     <input type="button" class="btn btn-lg" value="Cancel" ng-click='hideAddForm()'/>
                 </div>
             </form>
+            <div class="messages">
+                <div ng-repeat='message in playground.messages' class="message">
+                    {{message}}
+                </div>
+            </div>
         </div>
     </div>
 </section>
