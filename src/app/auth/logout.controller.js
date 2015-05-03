@@ -7,4 +7,4 @@ angular.module('firePockets')
             $rootScope.$broadcast('logoutEvent');
             $window.location.href = '/';
         };
-}]);
+    }]);

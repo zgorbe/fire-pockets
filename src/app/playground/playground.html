@@ -1,4 +1,4 @@
-<section ng-controller="PlaygroundCtrl">
+<section ng-controller="PlaygroundCtrl" class="playground">
     <div class="row">
         <div class="col-md-offset-2 col-md-8">
             <div><input type="button" class="btn btn-lg btn-info" value="Add a message" ng-click='showAddForm()' ng-hide='addFormVisible' /></div>
@@ -13,8 +13,8 @@
                 </div>
             </form>
             <div class="messages">
-                <div ng-repeat='message in playground.messages' class="message">
-                    {{message}}
+                <div ng-repeat='message in playground.messages'>
+                    <playground-message message="message"></playground-message>
                 </div>
             </div>
         </div>

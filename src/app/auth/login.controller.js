@@ -17,4 +17,4 @@ angular.module('firePockets')
                 $scope.user = {};
             });
         };
-}]);
+    }]);

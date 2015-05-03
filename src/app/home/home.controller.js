@@ -23,4 +23,4 @@ angular.module('firePockets')
                 'timestamp' : new Date().getTime()
             });
         };
-}]);
+    }]);

@@ -18,4 +18,4 @@ angular.module('firePockets')
             $scope.message = '';
             $scope.addFormVisible = false;
         };
-}]);
+    }]);

@@ -41,4 +41,4 @@ angular.module('firePockets')
             PocketsService.addMovement(movement);
             $scope.hideForm();
         };
-}]);
+    }]);
