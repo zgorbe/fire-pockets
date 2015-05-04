@@ -14,7 +14,7 @@
             </form>
             <div class="messages">
                 <div ng-repeat='message in playground.messages'>
-                    <playground-message message="message"></playground-message>
+                    <playground-message message="message" delete-message="deleteMessage(message)"></playground-message>
                 </div>
             </div>
         </div>

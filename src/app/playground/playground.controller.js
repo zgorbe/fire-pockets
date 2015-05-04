@@ -18,4 +18,12 @@ angular.module('firePockets')
             $scope.message = '';
             $scope.addFormVisible = false;
         };
+
+        $scope.deleteMessage = function(message) {
+            var index = $scope.playground.messages.indexOf(message);
+
+            if (index !== -1) {
+                $scope.playground.messages.splice(index, 1);
+            }
+        };
     }]);
