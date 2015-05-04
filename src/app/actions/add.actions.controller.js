@@ -23,6 +23,7 @@ angular.module('firePockets')
             delete $scope.movement.amount;
             $scope.actionFormVisible = false;
             $scope.movementFormVisible = true;
+            console.log('itt');
         };
 
         $scope.hideForm = function() {
