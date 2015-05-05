@@ -1,4 +1,4 @@
-<form class="col-md-6" ng-submit="addMovement(movement)" ng-show='movementFormVisible'>
+<form class="col-md-6" ng-submit="addMovement(movement)">
     <div class="form-group">
         <label for="movement-source">Source pocket:</label>
         <select id="movement-source" class="form-control" ng-model="movement.source" ng-options="pocket.$id as pocket.name for pocket in pockets">
