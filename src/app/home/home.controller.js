@@ -2,19 +2,15 @@
 
 angular.module('firePockets')
     .controller('HomeCtrl', ['$scope', 'PocketsService', function ($scope, PocketsService) {
-        var updateTotal = function() {
-        	PocketsService.getTotal().then(function(total) {
-        		$scope.total = total;
-        	});
-		};
-        
-        updateTotal();
+        $scope.getPockets = function() {
+            $scope.pockets = PocketsService.getPockets();    
+        };
 
-        $scope.$on('updateTotal', function() { 
-            updateTotal(); 
-        });
-
-        $scope.pockets = PocketsService.getPockets();
+        $scope.updateTotal = function() {
+            PocketsService.getTotal().then(function(total) {
+                $scope.total = total;
+            });
+        };
         
         $scope.addPocket = function(pocket) {
             PocketsService.createPocket({
@@ -23,4 +19,11 @@ angular.module('firePockets')
                 'timestamp' : new Date().getTime()
             });
         };
+
+        $scope.getPockets();
+        $scope.updateTotal();
+
+        $scope.$on('updateTotal', function() { 
+            $scope.updateTotal(); 
+        });
     }]);

@@ -1,22 +1,34 @@
 'use strict';
 
-describe('controllers', function(){
-  var scope;
+describe('HomeController', function(){
+    var controller, scope, mockPocketsService;
 
-  beforeEach(module('firePockets'));
+    beforeEach(module('firePockets'));
 
-  beforeEach(inject(function($rootScope) {
-    scope = $rootScope.$new();
-  }));
+    beforeEach(inject(function($rootScope, $controller, $q) {
+        scope = $rootScope.$new();
 
-  it('should define more than 5 awesome things', inject(function($controller) {
-    expect(scope.awesomeThings).toBeUndefined();
+        mockPocketsService = jasmine.createSpyObj('PocketsService', ['getTotal', 'getPockets']);
+        mockPocketsService.getTotal.andReturn($q.when(100));
+        mockPocketsService.getPockets.andReturn($q.when([{}, {}, {}]));
 
-    $controller('HomeCtrl', {
-      $scope: scope
+        controller = $controller('HomeCtrl', {
+            $scope: scope,
+            PocketsService: mockPocketsService
+        });
+
+    }));
+
+    it('should define 3 pockets', function() {
+        scope.getPockets();
+        expect(scope.pockets).toBeUndefined();
+        expect(angular.isArray(scope.pockets)).toBeTruthy();
+        expect(scope.pockets.length === 3).toBeTruthy();
     });
 
-    expect(angular.isArray(scope.awesomeThings)).toBeTruthy();
-    expect(scope.awesomeThings.length > 5).toBeTruthy();
-  }));
+    it('should define pockets total', function() {
+        scope.updateTotal();
+        expect(scope.total).toBeUndefined();
+        expect(scope.total > 0).toBeTruthy();
+    });
 });
