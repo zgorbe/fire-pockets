@@ -9,26 +9,24 @@ describe('HomeController', function(){
         scope = $rootScope.$new();
 
         mockPocketsService = jasmine.createSpyObj('PocketsService', ['getTotal', 'getPockets']);
-        mockPocketsService.getTotal.andReturn($q.when(100));
-        mockPocketsService.getPockets.andReturn($q.when([{}, {}, {}]));
+        mockPocketsService.getTotal.and.returnValue($q.when(100));
+        mockPocketsService.getPockets.and.returnValue([{}, {}, {}]);
 
         controller = $controller('HomeCtrl', {
             $scope: scope,
             PocketsService: mockPocketsService
         });
-
+        scope.$apply();
     }));
 
     it('should define 3 pockets', function() {
-        scope.getPockets();
-        expect(scope.pockets).toBeUndefined();
+        expect(scope.pockets).toBeDefined();
         expect(angular.isArray(scope.pockets)).toBeTruthy();
         expect(scope.pockets.length === 3).toBeTruthy();
     });
 
     it('should define pockets total', function() {
-        scope.updateTotal();
-        expect(scope.total).toBeUndefined();
-        expect(scope.total > 0).toBeTruthy();
+        expect(scope.total).toBeDefined();
+        expect(scope.total === 100).toBeTruthy();
     });
 });
