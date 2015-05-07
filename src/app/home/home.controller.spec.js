@@ -29,4 +29,9 @@ describe('HomeController', function(){
         expect(scope.total).toBeDefined();
         expect(scope.total === 100).toBeTruthy();
     });
+
+    it('should define addPocket function', function() {
+        expect(scope.addPocket).toBeDefined();
+        expect(angular.isFunction(scope.addPocket)).toBeDefined();
+    });
 });
