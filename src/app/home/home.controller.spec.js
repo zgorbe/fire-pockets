@@ -1,6 +1,6 @@
 'use strict';
 
-describe('HomeController', function(){
+describe('HomeController', function() {
     var controller, scope, mockPocketsService;
 
     beforeEach(module('firePockets'));
@@ -32,6 +32,6 @@ describe('HomeController', function(){
 
     it('should define addPocket function', function() {
         expect(scope.addPocket).toBeDefined();
-        expect(angular.isFunction(scope.addPocket)).toBeDefined();
+        expect(angular.isFunction(scope.addPocket)).toBe(true);
     });
 });

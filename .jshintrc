@@ -24,6 +24,7 @@
     "inject": false,
     "module": false,
     // JASMINE
+    "jasmine": false,    
     "describe": false,
     "it": false,
     "before": false,
@@ -31,6 +32,7 @@
     "after": false,
     "afterEach": false,
     "expect": false,
+    // Firebase
     "Firebase": false
   }
 }
