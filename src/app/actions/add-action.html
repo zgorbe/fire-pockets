@@ -1,4 +1,4 @@
-<form class="col-md-6" ng-submit="addAction(action)">
+<form class="col-md-offset-4 col-md-4" ng-submit="addAction(action)">
     <div class="form-group">
         <label for="action-pocket">Pocket:</label>
         <select id="action-pocket" class="form-control" ng-model="action.pocket" ng-options="pocket.$id as pocket.name for pocket in pockets">
@@ -6,7 +6,7 @@
     </div>
     <div class="form-group">
         <label for="action-amount">Amount:</label>
-        <input id="action-amount" class="form-control" type="number" ng-model="action.amount" required="" />
+        <input id="action-amount" class="form-control" type="number" ng-model="action.amount" required="" min="1" />
     </div>
     <div class="form-group">
         <label for="action-direction">Direction:</label>

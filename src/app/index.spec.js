@@ -12,40 +12,50 @@ describe('Testing Routes', function() {
         httpBackend = $httpBackend;
     }));
 
-    it('should redirect to login without authentication', function() {
-        httpBackend.expectGET('app/home/home.html').respond(200);
-        httpBackend.expectGET('app/auth/login.html').respond(200);
-
-        var loginPath = '/login';
-        expect(location.path()).toBe('');
-
-        location.path('/');
-        rootScope.$digest();
-
-        expect(location.path()).toBe(loginPath);
+    afterEach(function() {
+        httpBackend.verifyNoOutstandingExpectation();
+        httpBackend.verifyNoOutstandingRequest();
     });
 
-    it('should allow access the playground page without authentication', function() {
-        httpBackend.expectGET('app/playground/playground.html').respond(200);
+    describe('without authentication', function() {
+        it('should redirect to login', function() {
+            httpBackend.expectGET('app/home/home.html').respond(200);
+            httpBackend.expectGET('app/auth/login.html').respond(200);
 
-        var playgroundPath = '/playground';
-        expect(location.path()).toBe('');
+            var loginPath = '/login';
+            expect(location.path()).toBe('');
 
-        location.path(playgroundPath);
-        rootScope.$digest();
+            location.path('/');
+            rootScope.$digest();
 
-        expect(location.path()).toBe(playgroundPath);
-    });
+            httpBackend.flush();
+            expect(location.path()).toBe(loginPath);
+        });
 
-    it('should allow access the login page without authentication', function() {
-        httpBackend.expectGET('app/auth/login.html').respond(200);
+        it('should allow access the playground page', function() {
+            httpBackend.expectGET('app/playground/playground.html').respond(200);
 
-        var loginPath = '/login';
-        expect(location.path()).toBe('');
+            var playgroundPath = '/playground';
+            expect(location.path()).toBe('');
 
-        location.path(loginPath);
-        rootScope.$digest();
+            location.path(playgroundPath);
+            rootScope.$digest();
 
-        expect(location.path()).toBe(loginPath);
+            httpBackend.flush();
+            expect(location.path()).toBe(playgroundPath);
+        });
+
+        it('should allow access the login page', function() {
+            httpBackend.expectGET('app/auth/login.html').respond(200);
+
+            var loginPath = '/login';
+            expect(location.path()).toBe('');
+
+            location.path(loginPath);
+            rootScope.$digest();
+            
+            httpBackend.flush();
+            expect(location.path()).toBe(loginPath);
+        });
     });
 });

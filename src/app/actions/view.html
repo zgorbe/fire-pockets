@@ -1,3 +1,26 @@
 <section ng-controller="ViewActionsCtrl">
-view
+    <div class="row">
+        <div class="col-md-offset-2 col-md-8">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th><a href="" ng-click="predicate = 'pocketName'; reverse=!reverse">Pocket</a></th>
+                        <th><a href="" ng-click="predicate = 'amount'; reverse=!reverse">Amount</a></th>
+                        <th>Direction</th>
+                        <th>Movement</th>
+                        <th><a href="" ng-click="predicate = 'timestamp'; reverse=!reverse">Date</a></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="action in actions | orderBy:predicate:reverse">
+                        <td>{{action.pocketName}}</td>
+                        <td>{{action.amount}}</td>
+                        <td>{{action.direction}}</td>
+                        <td>{{action.movement}}</td>
+                        <td>{{action.timestamp | date}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </section>

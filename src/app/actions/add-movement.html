@@ -1,4 +1,4 @@
-<form class="col-md-6" ng-submit="addMovement(movement)">
+<form class="col-md-offset-4 col-md-4" ng-submit="addMovement(movement)">
     <div class="form-group">
         <label for="movement-source">Source pocket:</label>
         <select id="movement-source" class="form-control" ng-model="movement.source" ng-options="pocket.$id as pocket.name for pocket in pockets">
@@ -11,7 +11,7 @@
     </div>
     <div class="form-group">
         <label for="movement-amount">Amount:</label>
-        <input id="movement-amount" class="form-control" type="number" ng-model="movement.amount" required="" />
+        <input id="movement-amount" class="form-control" type="number" ng-model="movement.amount" required="" min="1"/>
     </div>
     <div class="form-group">
         <input class="btn btn-default btn-info" type="submit" value="Create movement" />

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('firePockets')
-    .controller('AddActionsCtrl', ['$scope', 'PocketsService', function ($scope, PocketsService) {
+    .controller('AddActionsCtrl', ['$scope', 'ActionsService', function ($scope, ActionsService) {
         $scope.action = {
             direction: 'plus'
         };
@@ -31,14 +31,14 @@ angular.module('firePockets')
         };
 
         $scope.addAction = function(action) {
-            PocketsService.addAction(action).then(function() {
+            ActionsService.addAction(action).then(function() {
                 $scope.$emit('updateTotal');
             });
             $scope.hideForm();
         };
 
         $scope.addMovement = function(movement) {
-            PocketsService.addMovement(movement);
+            ActionsService.addMovement(movement);
             $scope.hideForm();
         };
     }]);
