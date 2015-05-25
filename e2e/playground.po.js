@@ -6,11 +6,15 @@
 'use strict';
 
 var PlaygroundPage = function() { 
-    this.addButton = element(by.css('input.btn'));
-
+    this.addButton = element(by.buttonText('Add a message'));
+    this.submitButton = element(by.buttonText('Add'));
+    
     this.getMessageList = function() {
         return element.all(by.repeater('message in playground.messages'));
-    }	
+    };
+    this.getTextarea = function() {
+        return element(by.model('message'));
+    };
 };
 
 module.exports = new PlaygroundPage();

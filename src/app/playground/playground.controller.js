@@ -14,6 +14,9 @@ angular.module('firePockets')
         };        
 
         $scope.addMessage = function(message) {
+            if (!$scope.playground.messages) {
+                $scope.playground.messages = [];
+            }
             $scope.playground.messages.unshift(message);
             $scope.message = '';
             $scope.addFormVisible = false;
