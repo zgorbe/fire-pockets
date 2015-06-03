@@ -2,8 +2,9 @@
     <div class="row">
         <div class="col-md-offset-3 col-md-6">
             <div class="form-group text-center">
-                <button class="btn btn-lg btn-default btn-info" ng-click='showActionForm()'>Create action</button>
-                <button class="btn btn-lg btn-default btn-info" ng-click='showMovementForm()'>Create movement</button>
+                <button class="btn btn-default btn-info" ng-click='showActionForm()'>Create action</button>
+                <button class="btn btn-default btn-info" ng-click='showMovementForm()'>Create movement</button>
+                <button class="btn btn-default btn-info" ng-click='showPocketForm()'>Create pocket</button>
             </div>
         </div>        
     </div>
@@ -11,5 +12,6 @@
     <div class="row">
         <add-action-form ng-show='actionFormVisible'></add-action-form>
         <add-movement-form ng-show='movementFormVisible'></add-movement-form>
+        <add-pocket-form ng-show='pocketFormVisible'></add-pocket-form>
     </div>
 </section>

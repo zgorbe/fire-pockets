@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('firePockets')
-    .controller('AddActionsCtrl', ['$scope', 'ActionsService', function ($scope, ActionsService) {
+    .controller('AddActionsCtrl', ['$scope', 'ActionsService', 'PocketsService', function ($scope, ActionsService, PocketsService) {
         $scope.action = {
             direction: 'plus'
         };
@@ -16,18 +16,28 @@ angular.module('firePockets')
         $scope.showActionForm = function() {
             delete $scope.action.amount;
             $scope.movementFormVisible = false;
+            $scope.pocketFormVisible = false;
             $scope.actionFormVisible = true;
         };
 
         $scope.showMovementForm = function() {
             delete $scope.movement.amount;
             $scope.actionFormVisible = false;
+            $scope.pocketFormVisible = false;
             $scope.movementFormVisible = true;
+        };
+
+        $scope.showPocketForm = function() {
+            delete $scope.movement.amount;
+            $scope.actionFormVisible = false;
+            $scope.movementFormVisible = false;
+            $scope.pocketFormVisible = true;
         };
 
         $scope.hideForm = function() {
             $scope.actionFormVisible = false;
             $scope.movementFormVisible = false;
+            $scope.pocketFormVisible = false;
         };
 
         $scope.addAction = function(action) {
@@ -39,6 +49,12 @@ angular.module('firePockets')
 
         $scope.addMovement = function(movement) {
             ActionsService.addMovement(movement);
+            $scope.hideForm();
+        };
+
+        $scope.addPocket = function(pocket) {
+            pocket.timestamp = new Date().getTime();
+            PocketsService.createPocket(pocket);
             $scope.hideForm();
         };
     }]);

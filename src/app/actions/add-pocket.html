@@ -1,0 +1,14 @@
+<form class="col-md-offset-4 col-md-4" ng-submit="addPocket(pocket)">
+    <div class="form-group">
+        <label for="pocket-name">Name:</label>
+        <input id="pocket-name" class="form-control" type="text" ng-model="pocket.name" required="" />
+    </div>
+    <div class="form-group">
+        <label for="pocket-balance">Balance:</label>
+        <input id="pocket-balance" class="form-control" type="number" ng-model="pocket.balance" required="" min="0"/>
+    </div>    
+    <div class="form-group">
+        <input class="btn btn-default btn-info" type="submit" value="Create action" />
+        <input type="button" class="btn btn-default" ng-click='hideForm()' value="Cancel" />
+    </div>
+</form>
