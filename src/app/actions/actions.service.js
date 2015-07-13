@@ -14,7 +14,7 @@ angular.module('firePockets')
             return $firebaseArray(new Firebase(url + '/' + pocketId + '/actions')); 
         };
 
-        factory.getAllActions = function() {
+        factory.getAllActions = function(since) {
             var pockets = PocketsService.getPockets(),
                 actions = [],
                 deferred = $q.defer();
@@ -22,8 +22,10 @@ angular.module('firePockets')
             pockets.$loaded().then(function () {
                 angular.forEach(pockets, function(pocket) {
                     angular.forEach(pocket.actions, function(action) {
-                        action.pocketName = pocket.name;
-                        actions.push(action);
+                        if (!since || since.getTime() < action.timestamp) {
+                            action.pocketName = pocket.name;
+                            actions.push(action);
+                        }
                     });
                 });
                 deferred.resolve(actions);
