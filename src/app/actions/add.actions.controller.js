@@ -57,4 +57,8 @@ angular.module('firePockets')
             PocketsService.createPocket(pocket);
             $scope.hideForm();
         };
+
+        $scope.createSnapshot = function() {
+            PocketsService.createSnapshot();        
+        };
     }]);

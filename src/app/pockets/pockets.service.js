@@ -2,7 +2,8 @@
 
 angular.module('firePockets')
     .factory('PocketsService', ['$firebaseArray', '$firebaseObject', '$q', 'firebaseConfig', function ($firebaseArray, $firebaseObject, $q, firebaseConfig) {
-        var url = firebaseConfig.pocketsUrl;
+        var url = firebaseConfig.pocketsUrl,
+            snapshotsUrl = firebaseConfig.snapshotsUrl;
 
         var factory = {};
 
@@ -33,6 +34,18 @@ angular.module('firePockets')
             });
 
             return deferred.promise;
+        };
+
+        factory.createSnapshot = function() {
+            factory.getTotal().then(function(total) {
+                var snapshot = {
+                    'time': new Date().getTime(),
+                    'total': total
+                };
+
+                $firebaseArray(new Firebase(snapshotsUrl)).$add(snapshot);      
+            });
+            
         };
 
         return factory;

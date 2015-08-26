@@ -3,7 +3,8 @@
 angular.module('firePockets', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngRoute', 'firebase'])
     .constant('firebaseConfig', {
         'pocketsUrl': 'https://fire-pockets.firebaseio.com/pockets',
-        'playgroundUrl': 'https://fire-pockets.firebaseio.com/playground'
+        'playgroundUrl': 'https://fire-pockets.firebaseio.com/playground',
+        'snapshotsUrl': 'https://fire-pockets.firebaseio.com/snapshots'
     })
     .config(function ($routeProvider) {
         $routeProvider
