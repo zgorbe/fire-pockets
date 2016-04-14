@@ -1,14 +1,11 @@
 'use strict';
+var PlaygroundPage = require('./playground.po');
 
 describe('The playground view', function () {
-    var page;
+    var page = new PlaygroundPage();
 
-    beforeEach(function () {
-        if (!page) {
-            browser.get('http://localhost:3000/#/playground');
-            browser.driver.sleep(5000);
-            page = require('./playground.po');
-        }
+    beforeAll(function () {
+        page.get();
     });
 
     it('should include add button', function() {
@@ -16,6 +13,7 @@ describe('The playground view', function () {
     });
 
     it('should list messages', function() {
+        browser.wait(protractor.ExpectedConditions.presenceOf(page.messagesContainer), 10000, 'Failed to load messages');
         page.getMessageList().count().then(function(count) {
             expect(count > 0).toBe(true);    
         });
@@ -36,5 +34,11 @@ describe('The playground view', function () {
     });
 
     it('should delete test message', function() {
+        page.getMessageList().count().then(function(originalCount) {
+            page.deleteNth(0);
+            page.getMessageList().count().then(function(count) {
+                expect(originalCount - count).toBe(1);
+            });    
+        });
     });
 });

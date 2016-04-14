@@ -12,7 +12,7 @@
                     <input type="button" class="btn btn-lg" value="Cancel" ng-click='hideAddForm()'/>
                 </div>
             </form>
-            <div class="messages">
+            <div class="messages" ng-if="playground.messages.length">
                 <div ng-repeat='message in playground.messages'>
                     <playground-message message="message" delete-message="deleteMessage(message)"></playground-message>
                 </div>

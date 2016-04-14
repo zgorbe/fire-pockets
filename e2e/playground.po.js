@@ -8,13 +8,22 @@
 var PlaygroundPage = function() { 
     this.addButton = element(by.buttonText('Add a message'));
     this.submitButton = element(by.buttonText('Add'));
-    
+    this.messagesContainer = element(by.css('.messages'));
+
+    this.get = function() {
+        browser.get('http://localhost:3000/#/playground');
+    };
     this.getMessageList = function() {
         return element.all(by.repeater('message in playground.messages'));
     };
     this.getTextarea = function() {
         return element(by.model('message'));
     };
+    this.deleteNth = function(n) {
+        var message = this.getMessageList().get(n);
+        browser.actions().mouseMove(message).perform();
+        message.element(by.css('.delete-link')).click();
+    };
 };
 
-module.exports = new PlaygroundPage();
+module.exports = PlaygroundPage;
