@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('firePockets')
-    .directive('yourBalanceSince', ['ActionsService', function (ActionsService) {
+    .directive('yourBalanceSince', ['ActionsService', '_', function (ActionsService, _) {
         return {
             restrict: 'E',
             scope: { },
@@ -20,19 +20,16 @@ angular.module('firePockets')
                 });
 
                 function calcPlusValue(actions) {
-                    var sum = 0;
-
-                    angular.forEach(actions, function(action) {
+                    return _.reduce(actions, function(total, action) {
                         if (!action.movement) {
                             if (action.direction === 'plus') {
-                                sum += action.amount;
+                                total += action.amount;
                             } else {
-                                sum -= action.amount;
+                                total -= action.amount;
                             }
                         }
-                    });
-                    
-                    return sum;
+                        return total;
+                    }, 0);
                 }
             }
         };

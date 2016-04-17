@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('firePockets')
-    .factory('ActionsService', ['$firebaseArray', '$firebaseObject', '$q', 'firebaseConfig', 'PocketsService', function ($firebaseArray, $firebaseObject, $q, firebaseConfig, PocketsService) {
+    .factory('ActionsService', ['$firebaseArray', '$firebaseObject', '$q', 'firebaseConfig', 'PocketsService', '_', function ($firebaseArray, $firebaseObject, $q, firebaseConfig, PocketsService, _) {
         var url = firebaseConfig.pocketsUrl;
 
         var updateTimestamp = function(obj) {
@@ -15,22 +15,24 @@ angular.module('firePockets')
         };
 
         factory.getAllActions = function(since) {
-            var pockets = PocketsService.getPockets(),
-                actions = [],
-                deferred = $q.defer();
+            var pockets = PocketsService.getPockets();
 
-            pockets.$loaded().then(function () {
-                angular.forEach(pockets, function(pocket) {
-                    angular.forEach(pocket.actions, function(action) {
-                        if (!since || since.getTime() < action.timestamp) {
+            return pockets.$loaded().then(function () {
+                return _.chain(pockets)
+                    .map(function(pocket) {
+                        return _.map(pocket.actions, function(action) {
                             action.pocketName = pocket.name;
-                            actions.push(action);
+                            return action;
+                        });
+                    })
+                    .flatten()
+                    .filter(function(action){
+                        if (!since || since.getTime() < action.timestamp) {
+                            return true;
                         }
-                    });
-                });
-                deferred.resolve(actions);
+                        return false;
+                    }).value();
             });
-            return deferred.promise;
         };
 
         factory.addAction = function(action) {

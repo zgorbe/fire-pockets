@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('firePockets')
-    .factory('PocketsService', ['$firebaseArray', '$firebaseObject', '$q', 'firebaseConfig', function ($firebaseArray, $firebaseObject, $q, firebaseConfig) {
+    .factory('PocketsService', ['$firebaseArray', '$firebaseObject', '$q', 'firebaseConfig', '_', function ($firebaseArray, $firebaseObject, $q, firebaseConfig, _) {
         var url = firebaseConfig.pocketsUrl,
             snapshotsUrl = firebaseConfig.snapshotsUrl;
 
@@ -24,13 +24,9 @@ angular.module('firePockets')
                 deferred = $q.defer();
 
             pockets.$loaded().then(function () {
-                var total = 0;
-                angular.forEach(pockets, function (pocket) {
-                    if (pocket && pocket.balance) {
-                        total += parseInt(pocket.balance);
-                    }
-                });
-                deferred.resolve(total);
+                deferred.resolve(_.reduce(pockets, function(total, pocket) {
+                    return total += pocket.balance || 0;
+                }, 0));
             });
 
             return deferred.promise;

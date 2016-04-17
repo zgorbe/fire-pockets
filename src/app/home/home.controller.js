@@ -20,7 +20,5 @@ angular.module('firePockets')
             });
         };
 
-        $scope.$on('updateTotal', function() { 
-            updateTotal(); 
-        });
+        $scope.$on('updateTotal', updateTotal);
     }]);

@@ -37,7 +37,11 @@ angular.module('firePockets', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize'
         .otherwise({
             redirectTo: '/'
         });
-    }).run(['$rootScope', '$location', function($rootScope, $location) {
+    })
+    .factory('_', ['$window', function($window) {
+        return $window._;
+    }])
+    .run(['$rootScope', '$location', function($rootScope, $location) {
         $rootScope.$on('$routeChangeError', function(event, next, previous, error) {
             if (error === 'AUTH_REQUIRED') {
                 $location.path('/login');

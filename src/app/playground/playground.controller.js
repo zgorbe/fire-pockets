@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('firePockets')
-    .controller('PlaygroundCtrl', ['$scope', '$firebaseObject', 'firebaseConfig', function ($scope, $firebaseObject, firebaseConfig) {
+    .controller('PlaygroundCtrl', ['$scope', '$firebaseObject', 'firebaseConfig', '_', function ($scope, $firebaseObject, firebaseConfig, _) {
     	var obj = $firebaseObject(new Firebase(firebaseConfig.playgroundUrl));
     	obj.$bindTo($scope, 'playground');
 
@@ -23,10 +23,6 @@ angular.module('firePockets')
         };
 
         $scope.deleteMessage = function(message) {
-            var index = $scope.playground.messages.indexOf(message);
-
-            if (index !== -1) {
-                $scope.playground.messages.splice(index, 1);
-            }
+            _.pull($scope.playground.messages, message);
         };
     }]);
